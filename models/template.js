@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+     Template.belongsTo(models.Checklist, { foreignKey: 'checklist_id' })
+     Template.belongsTo(models.Item, { foreignKey: 'item_id' })
     }
   };
   Template.init({

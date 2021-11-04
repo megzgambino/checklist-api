@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Checklist.belongsToMany(models.Item, {foreignKey: 'checklist_id', through: 'Template'  })
     }
   };
   Checklist.init({
@@ -20,7 +20,12 @@ module.exports = (sequelize, DataTypes) => {
     is_completed: DataTypes.BOOLEAN,
     completed_at: DataTypes.STRING,
     updated_by: DataTypes.STRING,
-    due: DataTypes.STRING,
+    due: {
+      type: DataTypes.STRING,
+      validate: {
+        isDate: true
+      }
+    },
     urgency: DataTypes.INTEGER
   }, {
     sequelize,
